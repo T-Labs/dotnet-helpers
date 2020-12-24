@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace DotnetHelpers.Helpers
 {
     public static class Converter

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace DotnetHelpers.Extensions
 {
@@ -10,7 +6,7 @@ namespace DotnetHelpers.Extensions
 
     public static class DecimalExtensions
     {
-        public static decimal Round(this decimal value, int places, 
+        public static decimal Round(this decimal value, int places,
             RoundType roundType = RoundType.Nearest)
         {
             if (roundType == RoundType.Nearest)
