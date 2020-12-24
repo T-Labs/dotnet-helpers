@@ -28,8 +28,12 @@ namespace DotnetHelpers
                 {
                     const int maxLength = 500;
                     string body = call.RequestBody?.Substring(0, Math.Min(call.RequestBody?.Length ?? 0, maxLength));
-                    string responseContent = await call.HttpResponseMessage.Content.ReadAsStringAsync() ?? "";
-                    responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
+                    string responseContent = null;
+                    if (call.HttpResponseMessage?.Content != null)
+                    {
+                        responseContent = await call.HttpResponseMessage.Content.ReadAsStringAsync() ?? "";
+                        responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
+                    }
 
                     Console.WriteLine($"Error: {call.Exception.Message}, duration:{call.Duration}" +
                         $"{(string.IsNullOrEmpty(body) ? "" : $"\nbody: {body}")}" +
