@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 
-namespace DotnetHelpers.Extensions
+namespace DotnetHelpers
 {
     public static class HttpRequestExtensions
     {

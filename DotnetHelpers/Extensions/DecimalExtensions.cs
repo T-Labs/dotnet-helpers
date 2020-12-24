@@ -1,6 +1,6 @@
 using System;
 
-namespace DotnetHelpers.Extensions
+namespace DotnetHelpers
 {
     public enum RoundType { Nearest, Up, Down };
 

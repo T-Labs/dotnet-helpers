@@ -1,11 +1,11 @@
-﻿using Flurl;
+using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
 using System;
 
-namespace DotnetHelpers.Extensions
+namespace DotnetHelpers
 {
     public static class FlurlExtensions
     {

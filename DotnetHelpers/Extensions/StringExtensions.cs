@@ -1,4 +1,4 @@
-namespace DotnetHelpers.Extensions
+namespace DotnetHelpers
 {
     public static class StringExtensions
     {

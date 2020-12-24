@@ -1,4 +1,4 @@
-namespace DotnetHelpers.Helpers
+namespace DotnetHelpers
 {
     public static class Converter
     {
