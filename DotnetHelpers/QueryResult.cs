@@ -1,4 +1,4 @@
-﻿using Flurl.Http;
+using Flurl.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,19 +39,6 @@ namespace DotnetHelpers
 
         public static QueryResult CreateFailed(QueryResult otherResult) =>
             CreateFailed(otherResult.Errors.ToArray());
-
-        public static async Task<QueryResult> FromRequest(Task<IFlurlResponse> request)
-        {
-            try
-            {
-                await request;
-                return CreateSucceeded();
-            }
-            catch (Exception e)
-            {
-                return CreateFailed(e.Message);
-            }
-        }
     }
 
     public class QueryResult<T> : QueryResult
@@ -81,17 +68,5 @@ namespace DotnetHelpers
 
         public static new QueryResult<T> CreateFailed(QueryResult otherResult) =>
             CreateFailed(otherResult.Errors.ToArray());
-
-        public static async Task<QueryResult<T>> FromRequest(Task<T> request)
-        {
-            try
-            {
-                return CreateSucceeded(await request);
-            }
-            catch (Exception e)
-            {
-                return CreateFailed(e.Message);
-            }
-        }
     }
 }
