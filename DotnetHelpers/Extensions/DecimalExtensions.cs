@@ -18,5 +18,9 @@ namespace DotnetHelpers
                 : Math.Ceiling(value * multiplier) / multiplier;
             return decimal.Round(result, places);
         }
+
+        public static decimal RoundUp(this decimal value, int places) => value.Round(places, RoundType.Up);
+
+        public static decimal RoundDown(this decimal value, int places) => value.Round(places, RoundType.Down);
     }
 }
