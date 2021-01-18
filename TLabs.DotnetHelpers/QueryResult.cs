@@ -2,14 +2,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace DotnetHelpers
+namespace TLabs.DotnetHelpers
 {
     public class QueryResult
     {
-        [JsonProperty] // required for deserialization without public set
         public bool Succeeded { get; protected set; }
 
-        [JsonProperty]
         public List<string> Errors { get; protected set; } = new List<string>();
 
         public string ErrorsString =>

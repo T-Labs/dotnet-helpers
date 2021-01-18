@@ -1,13 +1,17 @@
 using System;
 
-namespace DotnetHelpers
+namespace TLabs.DotnetHelpers
 {
     public enum RoundType { Nearest, Up, Down };
 
     public static class DecimalExtensions
     {
-        public static decimal Round(this decimal value, int places,
-            RoundType roundType = RoundType.Nearest)
+        /// <summary>
+        /// Remove trailing zeroes
+        /// </summary>
+        public static decimal Normalize(this decimal value) => value / 1.000000000000000000000000000000000m;
+
+        public static decimal Round(this decimal value, int places, RoundType roundType = RoundType.Nearest)
         {
             if (roundType == RoundType.Nearest)
                 return decimal.Round(value, places);
@@ -22,5 +26,15 @@ namespace DotnetHelpers
         public static decimal RoundUp(this decimal value, int places) => value.Round(places, RoundType.Up);
 
         public static decimal RoundDown(this decimal value, int places) => value.Round(places, RoundType.Down);
+
+        /// <summary>
+        /// Returns original number if places is null
+        /// </summary>
+        public static decimal TryRound(this decimal value, int? places, RoundType roundType = RoundType.Nearest)
+        {
+            if (places == null)
+                return value;
+            return value.Round(places.Value, roundType);
+        }
     }
 }

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace DotnetHelpers
+namespace TLabs.DotnetHelpers
 {
     public static class FlurlExtensions
     {

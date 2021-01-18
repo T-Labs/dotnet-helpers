@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 
-namespace DotnetHelpers
+namespace TLabs.DotnetHelpers
 {
     public static class HttpRequestExtensions
     {

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
-namespace DotnetHelpers
+namespace TLabs.DotnetHelpers
 {
     public class StopwatchOperation : IDisposable
     {
