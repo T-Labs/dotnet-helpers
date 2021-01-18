@@ -35,16 +35,21 @@ namespace TLabs.DotnetHelpers
                         responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
                     }
 
-                    Console.WriteLine($"Error: {call.Exception.Message}, duration:{call.Duration}" +
+                    Console.WriteLine($"Error: {call.Exception.Message}, " +
+                        $"{(call.Duration.HasValue ? $"duration:{call.Duration}" : "")}" +
                         $"{(string.IsNullOrEmpty(body) ? "" : $"\nbody: {body}")}" +
                         $"{(string.IsNullOrEmpty(responseContent) ? "" : $"\nresponseContent: {responseContent}\n")}");
                 };
             });
         }
 
-        public static IFlurlRequest WithGateway(this Url url) => new FlurlRequest(Url.Combine(_gatewayUrl, url));
+        public static IFlurlRequest ExternalApi(this Url url) => new FlurlRequest(url);
 
-        public static IFlurlRequest WithGateway(this string url) => WithGateway(new Url(url));
+        public static IFlurlRequest ExternalApi(this string url) => ExternalApi(new Url(url));
+
+        public static IFlurlRequest InternalApi(this Url url) => new FlurlRequest(Url.Combine(_gatewayUrl, url));
+
+        public static IFlurlRequest InternalApi(this string url) => InternalApi(new Url(url));
 
         public static async Task<QueryResult> GetQueryResult(this Task<IFlurlResponse> request)
         {
