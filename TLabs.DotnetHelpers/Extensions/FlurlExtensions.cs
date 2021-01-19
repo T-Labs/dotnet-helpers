@@ -4,6 +4,8 @@ using Flurl.Http.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
 using System;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TLabs.DotnetHelpers
@@ -43,6 +45,24 @@ namespace TLabs.DotnetHelpers
             });
         }
 
+        // Extend POST and PUT requests to specify response type in 1 call
+
+        public static Task<T> PostJsonAsync<T>(this IFlurlRequest request, object data,
+            CancellationToken cancellationToken = default,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
+        {
+            return request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+        }
+
+        public static Task<T> PutJsonAsync<T>(this IFlurlRequest request, object data,
+            CancellationToken cancellationToken = default,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
+        {
+            return request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+        }
+
+        // Choose to use full url or send to gateway
+
         public static IFlurlRequest ExternalApi(this Url url) => new FlurlRequest(url);
 
         public static IFlurlRequest ExternalApi(this string url) => ExternalApi(new Url(url));
@@ -50,6 +70,8 @@ namespace TLabs.DotnetHelpers
         public static IFlurlRequest InternalApi(this Url url) => new FlurlRequest(Url.Combine(_gatewayUrl, url));
 
         public static IFlurlRequest InternalApi(this string url) => InternalApi(new Url(url));
+
+        // Wrap response in QueryResult
 
         public static async Task<QueryResult> GetQueryResult(this Task<IFlurlResponse> request)
         {

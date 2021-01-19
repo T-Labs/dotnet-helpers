@@ -39,7 +39,6 @@ namespace TLabs.DotnetHelpers
 
     public class QueryResult<T> : QueryResult
     {
-        [JsonProperty]
         public T Data { get; protected set; }
 
         public static QueryResult<T> CreateSucceeded(T data)
