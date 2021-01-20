@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace TLabs.DotnetHelpers
 {
@@ -6,6 +7,16 @@ namespace TLabs.DotnetHelpers
 
     public static class DecimalExtensions
     {
+        /// <summary>
+        /// Add spaces between thousands
+        /// </summary>
+        public static string Readable(this decimal value, bool useRound = false)
+        {
+            if (useRound)
+                value = value > 1_000 ? value.Round(2) : value.Round(8);
+            return value.ToString("n", new NumberFormatInfo { NumberGroupSeparator = " " }); // add space between 1000's
+        }
+
         /// <summary>
         /// Remove trailing zeroes
         /// </summary>
