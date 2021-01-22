@@ -1,6 +1,7 @@
 using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -13,7 +14,7 @@ namespace TLabs.DotnetHelpers
     {
         private static string _gatewayUrl;
 
-        public static void InitFlurl(string gatewayUrl)
+        public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
         {
             _gatewayUrl = gatewayUrl;
 
