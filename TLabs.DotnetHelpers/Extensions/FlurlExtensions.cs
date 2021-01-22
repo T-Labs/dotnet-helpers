@@ -1,7 +1,6 @@
 using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
-using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -14,7 +13,7 @@ namespace TLabs.DotnetHelpers
     {
         private static string _gatewayUrl;
 
-        public static void UseFlurl(this IApplicationBuilder app, string gatewayUrl)
+        public static void InitFlurl(string gatewayUrl)
         {
             _gatewayUrl = gatewayUrl;
 
