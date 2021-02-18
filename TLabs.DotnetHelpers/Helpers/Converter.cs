@@ -1,4 +1,4 @@
-namespace TLabs.DotnetHelpers
+namespace TLabs.DotnetHelpers.Helpers
 {
     public static class Converter
     {
