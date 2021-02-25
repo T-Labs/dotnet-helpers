@@ -5,13 +5,15 @@ namespace TLabs.DotnetHelpers
 {
     public class StopwatchOperation : IDisposable
     {
-        public string Name { get; set; }
         protected Stopwatch InnerStopwatch { get; set; }
+        public string Name { get; set; }
+        public Action<string> LogAction { get; set; }
 
-        public StopwatchOperation(string name)
+        public StopwatchOperation(string name, Action<string> logAction)
         {
             InnerStopwatch = new Stopwatch();
             Name = name ?? throw new ArgumentNullException(nameof(name));
+            LogAction = logAction;
 
             InnerStopwatch.Start();
         }
@@ -28,7 +30,7 @@ namespace TLabs.DotnetHelpers
             if (InnerStopwatch == null) return;
 
             InnerStopwatch.Stop();
-            Console.WriteLine($"Duration of '{Name}' is {InnerStopwatch.ElapsedMilliseconds} milliseconds.");
+            LogAction($"Duration of '{Name}' is {InnerStopwatch.ElapsedMilliseconds} milliseconds.");
             InnerStopwatch = null;
         }
     }

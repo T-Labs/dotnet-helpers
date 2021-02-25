@@ -45,7 +45,7 @@ namespace TLabs.DotnetHelpers
             });
         }
 
-        // Extend POST and PUT requests to specify response type in 1 call
+        // Extend POST and PUT requests to specify response type in a single call
 
         public static Task<T> PostJsonAsync<T>(this IFlurlRequest request, object data,
             CancellationToken cancellationToken = default,
@@ -80,6 +80,11 @@ namespace TLabs.DotnetHelpers
                 await request;
                 return QueryResult.CreateSucceeded();
             }
+            catch (FlurlHttpException e)
+            {
+                string responseString = await e.GetResponseStringAsync();
+                return QueryResult.CreateFailed($"{e.Message}. {responseString}");
+            }
             catch (Exception e)
             {
                 return QueryResult.CreateFailed(e.Message);
@@ -91,6 +96,11 @@ namespace TLabs.DotnetHelpers
             try
             {
                 return QueryResult<T>.CreateSucceeded(await request);
+            }
+            catch (FlurlHttpException e)
+            {
+                string responseString = await e.GetResponseStringAsync();
+                return QueryResult<T>.CreateFailed($"{e.Message}. {responseString}");
             }
             catch (Exception e)
             {
