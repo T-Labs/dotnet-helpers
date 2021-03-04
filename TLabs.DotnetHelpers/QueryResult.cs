@@ -13,6 +13,8 @@ namespace TLabs.DotnetHelpers
         public string ErrorsString =>
             Errors.Count == 0 ? null : string.Join(";; ", Errors);
 
+        public override string ToString() => Succeeded ? $"QueryResult.Success" : $"QueryResult.Error: {ErrorsString}";
+
         public void EnsureSuccess()
         {
             if (!Succeeded)
@@ -40,6 +42,8 @@ namespace TLabs.DotnetHelpers
     public class QueryResult<T> : QueryResult
     {
         public T Data { get; protected set; }
+
+        public override string ToString() => Succeeded ? $"QueryResult.Data: {Data}" : $"QueryResult.Error: {ErrorsString}";
 
         public static QueryResult<T> CreateSucceeded(T data)
         {

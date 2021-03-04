@@ -47,18 +47,24 @@ namespace TLabs.DotnetHelpers
 
         // Extend POST and PUT requests to specify response type in a single call
 
-        public static Task<T> PostJsonAsync<T>(this IFlurlRequest request, object data,
+        public static async Task<T> PostJsonAsync<T>(this IFlurlRequest request, object data,
             CancellationToken cancellationToken = default,
             HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+            if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
+                return (T)(object)await request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveString();
+            else
+                return await request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
         }
 
-        public static Task<T> PutJsonAsync<T>(this IFlurlRequest request, object data,
+        public static async Task<T> PutJsonAsync<T>(this IFlurlRequest request, object data,
             CancellationToken cancellationToken = default,
             HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+            if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
+                return (T)(object)await request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveString();
+            else
+                return await request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
         }
 
         // Choose to use full url or send to gateway
