@@ -8,9 +8,7 @@ namespace TLabs.DotnetHelpers
 
         public static bool NotHasValue(this string value) => !HasValue(value);
 
-        /// <summary>
-        /// Return null if string is empty or whitespace
-        /// </summary>
+        /// <summary>Return null if string is empty or whitespace</summary>
         public static string NullIfEmpty(this string value) => value.HasValue() ? value : null;
 
         public static string RemoveWhitespaces(this string value) =>
