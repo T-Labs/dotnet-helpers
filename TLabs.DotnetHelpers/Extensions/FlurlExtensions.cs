@@ -52,7 +52,8 @@ namespace TLabs.DotnetHelpers
             HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
             if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
-                return (T)(object)await request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveString();
+                return (T)(object)await request
+                    .PostJsonAsync(data, cancellationToken, completionOption).ReceiveString();
             else
                 return await request.PostJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
         }
@@ -62,9 +63,31 @@ namespace TLabs.DotnetHelpers
             HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
             if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
-                return (T)(object)await request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveString();
+                return (T)(object)await request
+                    .PutJsonAsync(data, cancellationToken, completionOption).ReceiveString();
             else
                 return await request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+        }
+
+        // Add Delete requests with body
+
+        public static async Task<IFlurlResponse> DeleteJsonAsync(this IFlurlRequest request, object data,
+            CancellationToken cancellationToken = default,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
+        {
+            return await request.SendJsonAsync(HttpMethod.Delete, data, cancellationToken, completionOption);
+        }
+
+        public static async Task<T> DeleteJsonAsync<T>(this IFlurlRequest request, object data,
+            CancellationToken cancellationToken = default,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
+        {
+            if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
+                return (T)(object)await request
+                    .SendJsonAsync(HttpMethod.Delete, data, cancellationToken, completionOption).ReceiveString();
+            else
+                return await request
+                    .SendJsonAsync(HttpMethod.Delete, data, cancellationToken, completionOption).ReceiveJson<T>();
         }
 
         // Choose to use full url or send to gateway
