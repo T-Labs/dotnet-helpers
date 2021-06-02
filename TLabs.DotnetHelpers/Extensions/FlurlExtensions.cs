@@ -2,6 +2,7 @@ using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -13,10 +14,12 @@ namespace TLabs.DotnetHelpers
     public static class FlurlExtensions
     {
         private static string _gatewayUrl;
+        private static ILogger _logger;
 
-        public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
+        public static void InitFlurl(this IServiceCollection services, string gatewayUrl, ILogger logger)
         {
             _gatewayUrl = gatewayUrl;
+            _logger = logger;
 
             FlurlHttp.Configure(settings =>
             {
@@ -37,7 +40,7 @@ namespace TLabs.DotnetHelpers
                         responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
                     }
 
-                    Console.WriteLine($"Error: {call.Exception.Message}, " +
+                    _logger.LogError($"Error: {call.Exception.Message}, " +
                         $"{(call.Duration.HasValue ? $"duration:{call.Duration}" : "")}" +
                         $"{(string.IsNullOrEmpty(body) ? "" : $"\nbody: {body}")}" +
                         $"{(string.IsNullOrEmpty(responseContent) ? "" : $"\nresponseContent: {responseContent}\n")}");
@@ -112,7 +115,7 @@ namespace TLabs.DotnetHelpers
             catch (FlurlHttpException e)
             {
                 string responseString = await e.GetResponseStringAsync();
-                return QueryResult.CreateFailed($"{e.Message}. {responseString}");
+                return QueryResult.CreateFailedLogic(responseString, $"{e.Message}");
             }
             catch (Exception e)
             {
@@ -129,7 +132,7 @@ namespace TLabs.DotnetHelpers
             catch (FlurlHttpException e)
             {
                 string responseString = await e.GetResponseStringAsync();
-                return QueryResult<T>.CreateFailed($"{e.Message}. {responseString}");
+                return QueryResult<T>.CreateFailedLogic(responseString, $"{e.Message}");
             }
             catch (Exception e)
             {

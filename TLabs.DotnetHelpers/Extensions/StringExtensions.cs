@@ -24,7 +24,7 @@ namespace TLabs.DotnetHelpers
         public static string Cut(this System.Guid guid, int maxLength = 8)
             => guid.ToString().Cut(maxLength);
 
-        /// <summary>return empty string in case of ArgumentOutOfRange</summary>
+        /// <summary>Use instead of str.Substring, return empty string in case of ArgumentOutOfRange</summary>
         public static string SubstringSafe(this string value, int startIndex, int length)
         {
             if (value.NotHasValue() || value.Length <= startIndex)

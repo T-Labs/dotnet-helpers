@@ -10,8 +10,11 @@ namespace TLabs.DotnetHelpers
 
         public List<string> Errors { get; protected set; } = new List<string>();
 
+        public string LogicError { get; protected set; }
+
         public string ErrorsString =>
-            Errors.Count == 0 ? null : string.Join(";; ", Errors);
+            $"{(LogicError.HasValue() ? $"{LogicError}. " : "")} " +
+            $"{(Errors.Count == 0 ? "" : string.Join(";; ", Errors))}";
 
         public override string ToString() => Succeeded ? $"QueryResult.Success" : $"QueryResult.Error: {ErrorsString}";
 
@@ -30,13 +33,19 @@ namespace TLabs.DotnetHelpers
         {
             if (errors.Length == 0)
                 throw new ArgumentException($"CreateFailed() 0 errors");
-            var result = new QueryResult { Succeeded = false };
-            result.Errors.AddRange(errors);
-            return result;
+            return CreateFailedLogic(null, errors);
         }
 
         public static QueryResult CreateFailed(QueryResult otherResult) =>
-            CreateFailed(otherResult.Errors.ToArray());
+            CreateFailedLogic(otherResult.LogicError, otherResult.Errors.ToArray());
+
+        public static QueryResult CreateFailedLogic(string logicError, params string[] errors)
+        {
+            var result = new QueryResult { Succeeded = false };
+            result.LogicError = logicError;
+            result.Errors.AddRange(errors);
+            return result;
+        }
     }
 
     public class QueryResult<T> : QueryResult
@@ -55,17 +64,22 @@ namespace TLabs.DotnetHelpers
                 Data = data
             };
         }
-
-        public static new QueryResult<T> CreateFailed(params string[] errors)
+        public static QueryResult<T> CreateFailed(params string[] errors)
         {
             if (errors.Length == 0)
                 throw new ArgumentException($"CreateFailed() 0 errors");
-            var result = new QueryResult<T> { Succeeded = false };
-            result.Errors.AddRange(errors);
-            return result;
+            return CreateFailedLogic(null, errors);
         }
 
         public static new QueryResult<T> CreateFailed(QueryResult otherResult) =>
-            CreateFailed(otherResult.Errors.ToArray());
+            CreateFailedLogic(otherResult.LogicError, otherResult.Errors.ToArray());
+
+        public static new QueryResult<T> CreateFailedLogic(string logicError, params string[] errors)
+        {
+            var result = new QueryResult<T> { Succeeded = false };
+            result.LogicError = logicError;
+            result.Errors.AddRange(errors);
+            return result;
+        }
     }
 }
