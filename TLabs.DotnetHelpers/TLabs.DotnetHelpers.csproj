@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.22</Version>
+    <Version>1.0.24</Version>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -13,7 +12,6 @@
     <PackageDescription>Common classes for dotnet development</PackageDescription>
     <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
