@@ -16,10 +16,11 @@ namespace TLabs.DotnetHelpers
         private static string _gatewayUrl;
         private static ILogger _logger;
 
-        public static void InitFlurl(this IServiceCollection services, string gatewayUrl, ILogger logger)
+        public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
         {
             _gatewayUrl = gatewayUrl;
-            _logger = logger;
+            _logger = LoggerFactory.Create(builder => { builder.AddConsole(); })
+                .CreateLogger<FlurlCall>();
 
             FlurlHttp.Configure(settings =>
             {
@@ -44,32 +45,6 @@ namespace TLabs.DotnetHelpers
                         $"{(call.Duration.HasValue ? $"duration:{call.Duration}" : "")}" +
                         $"{(string.IsNullOrEmpty(body) ? "" : $"\nbody: {body}")}" +
                         $"{(string.IsNullOrEmpty(responseContent) ? "" : $"\nresponseContent: {responseContent}\n")}");
-                };
-            });
-        }
-
-        public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
-        {
-            _gatewayUrl = gatewayUrl;
-
-            FlurlHttp.Configure(settings =>
-            {
-                settings.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                });
-
-                // log info of error request
-                settings.OnErrorAsync = async (FlurlCall call) =>
-                {
-                    const int maxLength = 500;
-                    string body = call.RequestBody?.Substring(0, Math.Min(call.RequestBody?.Length ?? 0, maxLength));
-                    string responseContent = null;
-                    if (call.HttpResponseMessage?.Content != null)
-                    {
-                        responseContent = await call.HttpResponseMessage.Content.ReadAsStringAsync() ?? "";
-                        responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
-                    }
                 };
             });
         }
