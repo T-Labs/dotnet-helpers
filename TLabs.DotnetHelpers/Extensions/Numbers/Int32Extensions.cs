@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TLabs.DotnetHelpers.Extensions
+namespace TLabs.DotnetHelpers
 {
     public static class Int32Extensions
     {
