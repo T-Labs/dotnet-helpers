@@ -12,7 +12,7 @@ namespace TLabs.DotnetHelpers
         /// <summary>Add spaces between thousands</summary>
         public static string Readable(this int value)
         {
-            return value.ToString("n", new NumberFormatInfo { NumberGroupSeparator = " " }); // add space between 1000's
+            return value.ToString("N0", new NumberFormatInfo { NumberGroupSeparator = " " }); // add space between 1000's
         }
     }
 }
