@@ -7,9 +7,7 @@ namespace TLabs.DotnetHelpers
 
     public static class DecimalExtensions
     {
-        /// <summary>
-        /// Add spaces between thousands
-        /// </summary>
+        /// <summary>Add spaces between thousands</summary>
         public static string Readable(this decimal value, bool useRound = false)
         {
             if (useRound)
@@ -17,9 +15,7 @@ namespace TLabs.DotnetHelpers
             return value.ToString("n", new NumberFormatInfo { NumberGroupSeparator = " " }); // add space between 1000's
         }
 
-        /// <summary>
-        /// Remove trailing zeroes
-        /// </summary>
+        /// <summary>Remove trailing zeroes</summary>
         public static decimal Normalize(this decimal value) => value / 1.000000000000000000000000000000000m;
 
         public static decimal Round(this decimal value, int places, RoundingType roundType = RoundingType.Nearest)
