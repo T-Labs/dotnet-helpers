@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace TLabs.DotnetHelpers
 {
-    public class PagedList<T> : List<T>
+    public class PagedList<T>
     {
+        public List<T> Items { get; set; }
         public int CurrentPage { get; }
         public int TotalPages { get; }
         public int PageSize { get; }
@@ -22,7 +23,7 @@ namespace TLabs.DotnetHelpers
             CurrentPage = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-            AddRange(items);
+            Items = new List<T>(items);
         }
 
         public static PagedList<T> ToPagedList(IQueryable<T> source,
