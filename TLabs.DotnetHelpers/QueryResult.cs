@@ -13,6 +13,7 @@ namespace TLabs.DotnetHelpers
 
         public string LogicError { get; protected set; }
 
+        [JsonIgnore]
         public string ErrorsString =>
             $"{(LogicError.HasValue() ? $"{LogicError}. " : "")} " +
             $"{(Errors.Count == 0 ? "" : string.Join(";; ", Errors))}";
