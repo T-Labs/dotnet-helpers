@@ -8,7 +8,7 @@ namespace TLabs.DotnetHelpers.Extensions
     public static class NavigationManagerExtensions
     {
         /// <summary>Use to get queryString value in Blazor</summary>
-        public static QueryResult<T> TryGetQueryString<T>(this NavigationManager navManager, string key)
+        public static QueryResult<T> GetQueryStringParam<T>(this NavigationManager navManager, string key)
         {
             var uri = navManager.ToAbsoluteUri(navManager.Uri);
 
