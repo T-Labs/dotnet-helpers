@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Linq;
 
-namespace TLabs.DotnetHelpers.Extensions
+namespace TLabs.DotnetHelpers
 {
     public static class NavigationManagerExtensions
     {
