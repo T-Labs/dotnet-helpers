@@ -4,8 +4,18 @@ namespace TLabs.DotnetHelpers.Helpers
 {
     public static class TimeHelper
     {
+        public static long GetUnixLongTimestampNow() => GetUnixLongTimestamp(DateTimeOffset.UtcNow);
+
+        /// <summary>Timestamp with seconds. Example: 163212555831</summary>
+        public static long GetUnixLongTimestamp(DateTimeOffset date)
+        {
+            TimeSpan t = date.UtcDateTime - new DateTime(1970, 1, 1, 0, 0, 0);
+            return (long)t.TotalMilliseconds;
+        }
+
         public static int GetUnixTimestampNow() => GetUnixTimestamp(DateTimeOffset.UtcNow);
 
+        /// <summary>Timestamp with seconds. Example: 1632125555</summary>
         public static int GetUnixTimestamp(DateTimeOffset date)
         {
             TimeSpan t = date.UtcDateTime - new DateTime(1970, 1, 1, 0, 0, 0);
