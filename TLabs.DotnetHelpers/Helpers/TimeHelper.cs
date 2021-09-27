@@ -6,7 +6,7 @@ namespace TLabs.DotnetHelpers.Helpers
     {
         public static long GetUnixLongTimestampNow() => GetUnixLongTimestamp(DateTimeOffset.UtcNow);
 
-        /// <summary>Timestamp with seconds. Example: 163212555831</summary>
+        /// <summary>Timestamp with milliseconds. Example: 163212555831</summary>
         public static long GetUnixLongTimestamp(DateTimeOffset date)
         {
             TimeSpan t = date.UtcDateTime - new DateTime(1970, 1, 1, 0, 0, 0);
@@ -21,6 +21,16 @@ namespace TLabs.DotnetHelpers.Helpers
             TimeSpan t = date.UtcDateTime - new DateTime(1970, 1, 1, 0, 0, 0);
             return (int)t.TotalSeconds;
         }
+
+        /// <param name="timestamp">Timestamp with milliseconds. Example: 163212555831</param>
+        public static DateTimeOffset LongTimestampToDate(long timestamp)
+        {
+            var date = new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds(timestamp);
+            return new DateTimeOffset(date, TimeSpan.Zero);
+        }
+
+        public static DateTimeOffset TimestampToDate(long timestamp) =>
+            LongTimestampToDate(timestamp * 1000L);
 
         /// <summary>Get delay time for next request attempt (logarithmic increase)</summary>
         /// <param name="countAttempts">How many attempts were done. 0 - no delay</param>
