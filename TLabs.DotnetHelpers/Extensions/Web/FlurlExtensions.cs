@@ -49,7 +49,7 @@ namespace TLabs.DotnetHelpers
             });
         }
 
-        // Extend POST and PUT requests to specify response type in a single call
+        // Extend POST, PUT, PATCH requests to specify response type in a single call
 
         public static async Task<T> PostJsonAsync<T>(this IFlurlRequest request, object data,
             CancellationToken cancellationToken = default,
@@ -71,6 +71,17 @@ namespace TLabs.DotnetHelpers
                     .PutJsonAsync(data, cancellationToken, completionOption).ReceiveString();
             else
                 return await request.PutJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
+        }
+
+        public static async Task<T> PatchJsonAsync<T>(this IFlurlRequest request, object data,
+            CancellationToken cancellationToken = default,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
+        {
+            if (typeof(T) == typeof(string)) // if string then parse response as string and convert as T
+                return (T)(object)await request
+                    .PatchJsonAsync(data, cancellationToken, completionOption).ReceiveString();
+            else
+                return await request.PatchJsonAsync(data, cancellationToken, completionOption).ReceiveJson<T>();
         }
 
         // Add Delete requests with body
