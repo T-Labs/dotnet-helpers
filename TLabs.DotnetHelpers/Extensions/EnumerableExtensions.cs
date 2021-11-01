@@ -14,7 +14,7 @@ namespace TLabs.DotnetHelpers
 
         public static string ToStrings<T>(this IEnumerable<T> source, string separator = "\n ")
         {
-            return string.Join(separator, source.Select(_ => _.ToString());
+            return string.Join(separator, source.Select(_ => _.ToString()));
         }
     }
 }
