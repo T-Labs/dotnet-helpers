@@ -151,5 +151,23 @@ namespace TLabs.DotnetHelpers
                 return QueryResult<T>.CreateFailed(e.Message);
             }
         }
+
+        public static async Task<QueryResult> GetQueryResult(this Task request)
+        {
+            try
+            {
+                await request;
+                return QueryResult.CreateSucceeded();
+            }
+            catch (FlurlHttpException e)
+            {
+                string responseString = await e.GetResponseStringAsync();
+                return QueryResult.CreateFailedLogic(responseString, $"{e.Message}");
+            }
+            catch (Exception e)
+            {
+                return QueryResult.CreateFailed(e.Message);
+            }
+        }
     }
 }
