@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace TLabs.DotnetHelpers
 {
@@ -32,6 +34,23 @@ namespace TLabs.DotnetHelpers
             if (startIndex + length > value.Length)
                 length = value.Length - startIndex;
             return value.Substring(startIndex, length);
+        }
+
+        public enum LetterCapitalization { Any, Upper, Lower };
+
+        public static bool OnlyHasEngLetters(this string value, LetterCapitalization capit = LetterCapitalization.Any,
+            bool allowDigits = false)
+        {
+            string regexParams = capit switch
+            {
+                LetterCapitalization.Any => "A-Za-z",
+                LetterCapitalization.Upper => "A-Z",
+                LetterCapitalization.Lower => "a-z",
+                _ => throw new ArgumentException($"Unknown LetterCapitalization '{capit}'"),
+            };
+            if (allowDigits)
+                regexParams += "0-9";
+            return Regex.IsMatch(value, @$"^[{regexParams}]+$");
         }
     }
 }
