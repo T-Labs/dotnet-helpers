@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 
 namespace TLabs.DotnetHelpers
 {
+    public enum LetterCapitalization { Any, Upper, Lower };
+
     public static class StringExtensions
     {
         public static bool HasValue(this string value) => !string.IsNullOrWhiteSpace(value);
@@ -35,8 +37,6 @@ namespace TLabs.DotnetHelpers
                 length = value.Length - startIndex;
             return value.Substring(startIndex, length);
         }
-
-        public enum LetterCapitalization { Any, Upper, Lower };
 
         public static bool OnlyHasEngLetters(this string value, LetterCapitalization capit = LetterCapitalization.Any,
             bool allowDigits = false)
