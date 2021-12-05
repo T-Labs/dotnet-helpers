@@ -8,17 +8,21 @@ namespace TLabs.DotnetHelpers.Helpers
 {
     public static class EFMigrationHelper
     {
-        public static string FieldFromTextToUuid(string tableName, string fieldName)
+        public static string FieldFromTextToUuid(string tableName, string fieldName, bool isNullable)
         {
-            string sql = $"ALTER TABLE \"{tableName}\" ALTER COLUMN \"{fieldName}\" TYPE uuid USING \"{fieldName}\"::uuid;";
-            Console.WriteLine($"{nameof(FieldFromTextToUuid)} sql:\n {sql}");
+            string alterColumnSql = $"ALTER TABLE \"{tableName}\" ALTER COLUMN \"{fieldName}\"";
+            string sql = $"{alterColumnSql} {(isNullable ? "DROP NOT NULL" : "SET NOT NULL")};"
+                + $"\n {alterColumnSql} TYPE uuid USING \"{fieldName}\"::uuid;";
+            Console.WriteLine($"{nameof(FieldFromTextToUuid)} sql:\n {sql}\n");
             return sql;
         }
 
-        public static string FieldFromUuidToText(string tableName, string fieldName)
+        public static string FieldFromUuidToText(string tableName, string fieldName, bool isNullable)
         {
-            string sql = $"ALTER TABLE \"{tableName}\" ALTER COLUMN \"{fieldName}\" TYPE text;";
-            Console.WriteLine($"{nameof(FieldFromUuidToText)} sql:\n {sql}");
+            string alterColumnSql = $"ALTER TABLE \"{tableName}\" ALTER COLUMN \"{fieldName}\"";
+            string sql = $"{alterColumnSql} {(isNullable ? "DROP NOT NULL" : "SET NOT NULL")};"
+                + $"\n {alterColumnSql} TYPE text;";
+            Console.WriteLine($"{nameof(FieldFromUuidToText)} sql:\n {sql}\n");
             return sql;
         }
     }
