@@ -18,6 +18,11 @@ namespace TLabs.DotnetHelpers
 
         public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
         {
+            InitFlurl(gatewayUrl);
+        }
+
+        public static void InitFlurl(string gatewayUrl)
+        {
             _gatewayUrl = gatewayUrl;
             _logger = LoggerFactory.Create(builder => { builder.AddConsole(); })
                 .CreateLogger<FlurlCall>();
