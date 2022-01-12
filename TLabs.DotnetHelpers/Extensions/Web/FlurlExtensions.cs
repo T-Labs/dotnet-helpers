@@ -5,7 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -132,7 +135,7 @@ namespace TLabs.DotnetHelpers
             catch (FlurlHttpException e)
             {
                 string responseString = await e.GetResponseStringAsync();
-                return QueryResult.CreateFailedLogic(responseString, $"{e.Message}");
+                return QueryResult.CreateFailedLogic(responseString, $"{ClearSecreteInfo((e.Message))}");
             }
             catch (Exception e)
             {
@@ -149,7 +152,7 @@ namespace TLabs.DotnetHelpers
             catch (FlurlHttpException e)
             {
                 string responseString = await e.GetResponseStringAsync();
-                return QueryResult<T>.CreateFailedLogic(responseString, $"{e.Message}");
+                return QueryResult<T>.CreateFailedLogic(responseString, $"{ClearSecreteInfo(e.Message)}");
             }
             catch (Exception e)
             {
@@ -167,12 +170,24 @@ namespace TLabs.DotnetHelpers
             catch (FlurlHttpException e)
             {
                 string responseString = await e.GetResponseStringAsync();
-                return QueryResult.CreateFailedLogic(responseString, $"{e.Message}");
+                return QueryResult.CreateFailedLogic(responseString, $"{ClearSecreteInfo(e.Message)}");
             }
             catch (Exception e)
             {
                 return QueryResult.CreateFailed(e.Message);
             }
+        }
+
+        /// <summary>Hide private key text</summary>
+        private static string ClearSecreteInfo(string errorText)
+        {
+            var replaceWords = new List<string> { "privkey", "privatekey", "secretkey", "apisecret" };
+            if (!replaceWords.Any(w => errorText.Contains(w, StringComparison.OrdinalIgnoreCase)))
+                return errorText;
+
+            string pattern = string.Join("|", replaceWords.Select(w => $"{w}.{{1,25}}"));
+            string clearedError = Regex.Replace(errorText, pattern, "[secretkey...]", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            return clearedError;
         }
     }
 }

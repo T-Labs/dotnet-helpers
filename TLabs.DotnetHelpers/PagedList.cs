@@ -28,6 +28,8 @@ namespace TLabs.DotnetHelpers
             Items = new List<T>(items);
         }
 
+        /// <summary></summary>
+        /// <param name="pageNumber">pageNumber starts from 1</param>
         public static PagedList<T> ToPagedList(IQueryable<T> source,
             int pageNumber, int pageSize, bool isReverse = false)
         {
