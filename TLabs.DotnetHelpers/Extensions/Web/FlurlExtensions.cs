@@ -32,6 +32,7 @@ namespace TLabs.DotnetHelpers
 
             FlurlHttp.Configure(settings =>
             {
+                settings.Timeout = TimeSpan.FromMinutes(5); // default is 90sec
                 settings.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
