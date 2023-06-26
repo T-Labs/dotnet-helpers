@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -7,9 +8,19 @@ namespace TLabs.DotnetHelpers
 {
     public static class HttpRequestExtensions
     {
-        /// <summary>
-        /// Get request body for POST and PUT requests
-        /// </summary>
+        public static string GetBaseUrl(this HttpRequest req)
+        {
+            // https://blog.elmah.io/how-to-get-base-url-in-asp-net-core/
+            if (req == null)
+                return null;
+            var uriBuilder = new UriBuilder(req.Scheme, req.Host.Host, req.Host.Port ?? -1);
+            if (uriBuilder.Uri.IsDefaultPort)
+                uriBuilder.Port = -1;
+
+            return uriBuilder.Uri.AbsoluteUri;
+        }
+
+        /// <summary>Get request body for POST and PUT requests</summary>
         public static string GetBodyString(this HttpRequest request)
         {
             string body = "";
