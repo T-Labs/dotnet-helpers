@@ -52,5 +52,19 @@ namespace TLabs.DotnetHelpers
                 regexParams += "0-9";
             return Regex.IsMatch(value, @$"^[{regexParams}]+$");
         }
+
+        /// <summary>Correctly combine parts of url</summary>
+        public static string UrlCombine(this string url1, string url2)
+        {
+            // https://stackoverflow.com/a/2806717
+            if (url1.Length == 0)
+                return url2;
+            if (url2.Length == 0)
+                return url1;
+
+            url1 = url1.TrimEnd('/', '\\');
+            url2 = url2.TrimStart('/', '\\');
+            return string.Format("{0}/{1}", url1, url2);
+        }
     }
 }
