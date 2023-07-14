@@ -66,5 +66,8 @@ namespace TLabs.DotnetHelpers
             url2 = url2.TrimStart('/', '\\');
             return string.Format("{0}/{1}", url1, url2);
         }
+
+        public static bool IsIP(this string url) =>
+            new Regex(@"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b").IsMatch(url);
     }
 }
