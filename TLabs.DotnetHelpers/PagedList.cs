@@ -22,6 +22,8 @@ namespace TLabs.DotnetHelpers
 
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
+            if (pageNumber < 1)
+                throw new ArgumentException("PageNumber must be 1 or bigger");
             TotalCount = count;
             PageSize = pageSize;
             CurrentPage = pageNumber;
@@ -33,6 +35,8 @@ namespace TLabs.DotnetHelpers
         public static PagedList<T> ToPagedList(IQueryable<T> source,
             int pageNumber, int pageSize, bool isReverse = false)
         {
+            if (pageNumber < 1)
+                throw new ArgumentException("PageNumber must be 1 or bigger");
             var count = source.Count();
             var items = isReverse
                 ? source.SkipLast((pageNumber - 1) * pageSize).TakeLast(pageSize).ToList()
