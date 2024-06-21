@@ -29,6 +29,7 @@ namespace TLabs.DotnetHelpers.Helpers
             return new DateTimeOffset(date, TimeSpan.Zero);
         }
 
+        /// <param name="timestamp">Timestamp without milliseconds. Example: 1718178926</param>
         public static DateTimeOffset TimestampToDate(long timestamp) =>
             LongTimestampToDate(timestamp * 1000L);
 
