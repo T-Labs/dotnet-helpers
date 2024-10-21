@@ -29,7 +29,7 @@ namespace TLabs.DotnetHelpers
                 request.EnableBuffering(); // Allows reading body several times in ASP.Net Core
                 using (StreamReader reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, true))
                 {
-                    body = reader.ReadToEndAsync().Result;
+                    body = reader.ReadToEndAsync().Result.RemoveWhitespaces();
                 }
                 request.Body.Position = 0; // Rewind, so the ASP.Net Core is not lost when it looks the body for the request
             }
