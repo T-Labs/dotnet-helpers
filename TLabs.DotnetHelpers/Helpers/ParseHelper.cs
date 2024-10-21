@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace TLabs.DotnetHelpers
@@ -18,7 +19,7 @@ namespace TLabs.DotnetHelpers
             else if (typeof(T) == typeof(long))
                 return (T)(object)long.Parse(value);
             else if (typeof(T) == typeof(decimal))
-                return (T)(object)decimal.Parse(value);
+                return (T)(object)decimal.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
             else if (typeof(T).IsClass) // not value type
                 return JsonConvert.DeserializeObject<T>(value);
             else

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -51,6 +52,13 @@ namespace TLabs.DotnetHelpers
             if (allowDigits)
                 regexParams += "0-9";
             return Regex.IsMatch(value, @$"^[{regexParams}]+$");
+        }
+
+        public static decimal? DecimalTryParse(this string str)
+        {
+            if (decimal.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal result))
+                return result;
+            return null;
         }
 
         /// <summary>Correctly combine parts of url</summary>
