@@ -2,31 +2,52 @@ using System.Collections.Generic;
 
 namespace TLabs.DotnetHelpers.Information
 {
-    public class CountriesList
+    public class Countries
     {
-        public static HashSet<string> Names = new HashSet<string>() {
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia",
-            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
-            "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
-            "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia",
-            "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus",
-            "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
-            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France",
-            "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau",
-            "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
-            "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "North Korea", "South Korea", "Kosovo",
-            "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
-            "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania",
-            "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
-            "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway",
-            "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
-            "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines",
-            "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
-            "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka",
-            "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga",
-            "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
-            "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen",
-            "Zambia", "Zimbabwe"
+        public static Dictionary<string, string> Dict = new Dictionary<string, string>()
+        {
+            { "AF", "Afghanistan" }, { "AL", "Albania" }, { "DZ", "Algeria" }, { "AD", "Andorra" }, { "AO", "Angola" },
+            { "AG", "Antigua and Barbuda" }, { "AR", "Argentina" }, { "AM", "Armenia" }, { "AU", "Australia" },
+            { "AT", "Austria" }, { "AZ", "Azerbaijan" }, { "BS", "Bahamas" }, { "BH", "Bahrain" },
+            { "BD", "Bangladesh" }, { "BB", "Barbados" }, { "BY", "Belarus" }, { "BE", "Belgium" }, { "BZ", "Belize" },
+            { "BJ", "Benin" }, { "BT", "Bhutan" }, { "BO", "Bolivia" }, { "BA", "Bosnia and Herzegovina" },
+            { "BW", "Botswana" }, { "BR", "Brazil" }, { "BN", "Brunei" },
+            { "BG", "Bulgaria" }, { "BF", "Burkina Faso" }, { "BI", "Burundi" }, { "CV", "Cabo Verde" },
+            { "KH", "Cambodia" }, { "CM", "Cameroon" }, { "CA", "Canada" }, { "CF", "Central African Republic" },
+            { "TD", "Chad" }, { "CL", "Chile" }, { "CN", "China" }, { "CO", "Colombia" }, { "KM", "Comoros" },
+            { "CD", "Congo, Democratic Republic of the" }, { "CG", "Congo, Republic of the" }, { "CR", "Costa Rica" },
+            { "HR", "Croatia" }, { "CU", "Cuba" }, { "CY", "Cyprus" },
+            { "CZ", "Czech Republic" }, { "DK", "Denmark" }, { "DJ", "Djibouti" }, { "DM", "Dominica" },
+            { "DO", "Dominican Republic" }, { "TL", "East Timor" }, { "EC", "Ecuador" }, { "EG", "Egypt" },
+            { "SV", "El Salvador" }, { "GQ", "Equatorial Guinea" },
+            { "ER", "Eritrea" }, { "EE", "Estonia" }, { "SZ", "Eswatini" }, { "ET", "Ethiopia" }, { "FJ", "Fiji" },
+            { "FI", "Finland" }, { "FR", "France" }, { "GA", "Gabon" }, { "GM", "Gambia" }, { "GE", "Georgia" },
+            { "DE", "Germany" }, { "GH", "Ghana" }, { "GR", "Greece" }, { "GD", "Grenada" }, { "GT", "Guatemala" },
+            { "GN", "Guinea" }, { "GW", "Guinea-Bissau" }, { "GY", "Guyana" }, { "HT", "Haiti" }, { "HN", "Honduras" },
+            { "HU", "Hungary" }, { "IS", "Iceland" }, { "IN", "India" }, { "ID", "Indonesia" }, { "IR", "Iran" },
+            { "IQ", "Iraq" }, { "IE", "Ireland" }, { "IL", "Israel" }, { "IT", "Italy" }, { "JM", "Jamaica" },
+            { "JP", "Japan" }, { "JO", "Jordan" }, { "KZ", "Kazakhstan" }, { "KE", "Kenya" }, { "KI", "Kiribati" },
+            { "KP", "North Korea" }, { "KR", "South Korea" }, { "XK", "Kosovo" }, { "KW", "Kuwait" },
+            { "KG", "Kyrgyzstan" }, { "LA", "Laos" }, { "LV", "Latvia" }, { "LB", "Lebanon" }, { "LS", "Lesotho" },
+            { "LR", "Liberia" }, { "LY", "Libya" }, { "LI", "Liechtenstein" }, { "LT", "Lithuania" },
+            { "LU", "Luxembourg" }, { "MG", "Madagascar" }, { "MW", "Malawi" }, { "MY", "Malaysia" },
+            { "MV", "Maldives" }, { "ML", "Mali" }, { "MT", "Malta" }, { "MH", "Marshall Islands" },
+            { "MR", "Mauritania" }, { "MU", "Mauritius" }, { "MX", "Mexico" }, { "FM", "Micronesia" },
+            { "MD", "Moldova" }, { "MC", "Monaco" }, { "MN", "Mongolia" }, { "ME", "Montenegro" }, { "MA", "Morocco" },
+            { "MZ", "Mozambique" }, { "MM", "Myanmar" }, { "NA", "Namibia" }, { "NR", "Nauru" }, { "NP", "Nepal" },
+            { "NL", "Netherlands" }, { "NZ", "New Zealand" }, { "NI", "Nicaragua" }, { "NE", "Niger" },
+            { "NG", "Nigeria" }, { "MK", "North Macedonia" }, { "NO", "Norway" }, { "OM", "Oman" },
+            { "PK", "Pakistan" }, { "PW", "Palau" }, { "PA", "Panama" }, { "PG", "Papua New Guinea" },
+            { "PY", "Paraguay" }, { "PE", "Peru" }, { "PH", "Philippines" },
+            { "PL", "Poland" }, { "PT", "Portugal" }, { "QA", "Qatar" }, { "RO", "Romania" }, { "RU", "Russia" },
+            { "RW", "Rwanda" }, { "KN", "Saint Kitts and Nevis" }, { "LC", "Saint Lucia" },
+            { "VC", "Saint Vincent and the Grenadines" },
+            { "WS", "Samoa" }, { "SM", "San Marino" }, { "ST", "Sao Tome and Principe" }, { "SA", "Saudi Arabia" },
+            { "SN", "Senegal" }, { "RS", "Serbia" }, { "SC", "Seychelles" }, { "SL", "Sierra Leone" },
+            { "SG", "Singapore" }, { "SK", "Slovakia" }, { "SI", "Slovenia" }, { "SB", "Solomon Islands" },
+            { "SO", "Somalia" }, { "ZA", "South Africa" },
+            { "SS", "South Sudan" }, { "ES", "Spain" }, { "LK", "Sri Lanka" }, { "SD", "Sudan" }, { "SR", "Suriname" },
+            { "SE", "Sweden" }, { "CH", "Switzerland" }, { "SY", "Syria" }, { "TW", "Taiwan" }, { "TJ", "Tajikistan" }
         };
     }
 }
