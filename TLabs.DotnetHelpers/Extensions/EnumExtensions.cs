@@ -8,7 +8,7 @@ namespace TLabs.DotnetHelpers
 {
     public static class EnumExtensions
     {
-        public static string GetDisplayName(this Enum enumValue)
+        public static string GetAttributeDisplayName(this Enum enumValue)
         {
             return enumValue.GetType()
                 .GetMember(enumValue.ToString())
