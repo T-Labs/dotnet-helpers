@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TLabs.DotnetHelpers.Helpers
+namespace TLabs.DotnetHelpers
 {
     public static class PredicateBuilder
     {

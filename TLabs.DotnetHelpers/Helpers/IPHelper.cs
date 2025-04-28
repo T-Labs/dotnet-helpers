@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TLabs.DotnetHelpers.Helpers
+namespace TLabs.DotnetHelpers
 {
     public class IPHelper
     {

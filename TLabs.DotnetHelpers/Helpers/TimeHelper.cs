@@ -1,6 +1,6 @@
 using System;
 
-namespace TLabs.DotnetHelpers.Helpers
+namespace TLabs.DotnetHelpers
 {
     public static class TimeHelper
     {

@@ -1,6 +1,6 @@
-namespace TLabs.DotnetHelpers.Helpers
+namespace TLabs.DotnetHelpers
 {
-    public static class Converter
+    public static class BytesConverter
     {
         /// <summary>
         /// Convert byte[] to hex-string

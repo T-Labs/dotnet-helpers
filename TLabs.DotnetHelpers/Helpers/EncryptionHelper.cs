@@ -2,7 +2,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TLabs.DotnetHelpers.Helpers
+namespace TLabs.DotnetHelpers
 {
     public static class EncryptionHelper
     {
