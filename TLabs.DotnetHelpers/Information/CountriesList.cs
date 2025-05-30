@@ -48,7 +48,7 @@ namespace TLabs.DotnetHelpers.Information
             { "SO", "Somalia" }, { "ZA", "South Africa" },
             { "SS", "South Sudan" }, { "ES", "Spain" }, { "LK", "Sri Lanka" }, { "SD", "Sudan" }, { "SR", "Suriname" },
             { "SE", "Sweden" }, { "CH", "Switzerland" }, { "SY", "Syria" }, { "TW", "Taiwan" }, { "TJ", "Tajikistan" },
-            { "UZ", "Uzbekistan" }
+            { "UZ", "Uzbekistan" }, { "UA", "Ukraine" }
         };
     }
 }
