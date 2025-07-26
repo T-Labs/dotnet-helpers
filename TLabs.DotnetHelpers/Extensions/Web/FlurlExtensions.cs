@@ -24,7 +24,7 @@ namespace TLabs.DotnetHelpers
             InitFlurl(gatewayUrl);
         }
 
-        public static void InitFlurl(string gatewayUrl)
+        public static void InitFlurl(string gatewayUrl, bool logErrors = true)
         {
             _gatewayUrl = gatewayUrl;
             _logger = LoggerFactory.Create(builder => { builder.AddConsole(); })
@@ -38,23 +38,27 @@ namespace TLabs.DotnetHelpers
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 });
 
-                // log info of error request
-                settings.OnErrorAsync = async (FlurlCall call) =>
+                if (logErrors)
                 {
-                    const int maxLength = 500;
-                    string body = call.RequestBody?.Substring(0, Math.Min(call.RequestBody?.Length ?? 0, maxLength));
-                    string responseContent = null;
-                    if (call.HttpResponseMessage?.Content != null)
+                    // log info of error request
+                    settings.OnErrorAsync = async (FlurlCall call) =>
                     {
-                        responseContent = await call.HttpResponseMessage.Content.ReadAsStringAsync() ?? "";
-                        responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
-                    }
+                        const int maxLength = 500;
+                        string body =
+                            call.RequestBody?.Substring(0, Math.Min(call.RequestBody?.Length ?? 0, maxLength));
+                        string responseContent = null;
+                        if (call.HttpResponseMessage?.Content != null)
+                        {
+                            responseContent = await call.HttpResponseMessage.Content.ReadAsStringAsync() ?? "";
+                            responseContent = responseContent.Substring(0, Math.Min(responseContent.Length, maxLength));
+                        }
 
-                    _logger.LogError($"Error: {call.Exception.Message}, " +
-                        $"{(call.Duration.HasValue ? $"duration:{call.Duration}" : "")}" +
-                        $"{(string.IsNullOrEmpty(body) ? "" : $"\nbody: {body}")}" +
-                        $"{(string.IsNullOrEmpty(responseContent) ? "" : $"\nresponseContent: {responseContent}\n")}");
-                };
+                        _logger.LogError($"Error: {call.Exception.Message}, " +
+                            $"{(call.Duration.HasValue ? $"duration:{call.Duration}" : "")}" +
+                            $"{(body.HasValue() ? $"\nbody: {body}" : "")}" +
+                            $"{(responseContent.HasValue() ? $"\nresponseContent: {responseContent}\n" : "" )}");
+                    };
+                }
             });
         }
 
