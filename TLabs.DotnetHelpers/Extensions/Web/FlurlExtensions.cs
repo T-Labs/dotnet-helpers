@@ -19,9 +19,9 @@ namespace TLabs.DotnetHelpers
         private static string _gatewayUrl;
         private static ILogger _logger;
 
-        public static void InitFlurl(this IServiceCollection services, string gatewayUrl)
+        public static void InitFlurl(this IServiceCollection services, string gatewayUrl, bool logErrors = true)
         {
-            InitFlurl(gatewayUrl);
+            InitFlurl(gatewayUrl, logErrors);
         }
 
         public static void InitFlurl(string gatewayUrl, bool logErrors = true)
