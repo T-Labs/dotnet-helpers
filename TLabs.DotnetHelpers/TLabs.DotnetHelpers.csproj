@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.74</Version>
+    <Version>1.0.75</Version>
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -12,8 +12,13 @@
     <PackageDescription>Common classes for dotnet development</PackageDescription>
     <RepositoryUrl>https://github.com/T-Labs/dotnet-helpers</RepositoryUrl>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
 </Project>
